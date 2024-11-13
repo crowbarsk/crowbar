@@ -8,6 +8,9 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from mangum import Mangum
 
+app = FastAPI()
+handler = Mangum(app)
+
 @app.get("/")
 async def root():
     return {"message": "Filip's site"}
