@@ -41,6 +41,4 @@ async def post_train(train: Train):
     global cursor
     print(train)
     cursor.execute("""INSERT INTO train_properties(train_name, train_value) VALUES('train.train_name','train.train_value')""")
-    record = cursor.fetchall()
-    print(record)
-    return record
+    return "Success"
