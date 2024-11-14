@@ -17,6 +17,10 @@ connection = psycopg2.connect(database="postgres", user="postgres", password="Sa
 cursor = connection.cursor()
 messages_list = ["Filip's site","Awesome AWS","Posunovanie"] 
 
+class Train(BaseModel):
+    train_name: str
+    train_value: str
+
 @app.get("/")
 async def root():
     global counter
@@ -25,9 +29,18 @@ async def root():
     return {"message": messages_list[message_val]}
 
 @app.get("/trains")
-async def root():
+async def get_trains():
     global cursor
     cursor.execute("SELECT train_name, train_value from train_properties;")
+    record = cursor.fetchall()
+    print(record)
+    return record
+
+@app.post("/train")
+async def post_train(train: Train):
+    global cursor
+    print(train)
+    cursor.execute("""INSERT INTO train_properties(train_name, train_value) VALUES('train.train_name','train.train_value')""")
     record = cursor.fetchall()
     print(record)
     return record
