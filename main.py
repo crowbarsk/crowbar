@@ -29,4 +29,5 @@ async def root():
     global cursor
     cursor.execute("SELECT train_name, train_value from train_properties;")
     record = cursor.fetchall()
-    return {"Fetched data", record}
+    print(record)
+    return record
