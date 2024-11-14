@@ -10,7 +10,12 @@ from mangum import Mangum
 
 app = FastAPI()
 handler = Mangum(app)
+counter = 0
+messages_list = ["Filip's site","Awesome AWS","Posunovanie"] 
 
 @app.get("/")
 async def root():
-    return {"message": "Filip's site"}
+    nonlocal counter
+    counter += 1
+    message_val = counter % 3
+    return {"message": messages_list[message_val]}
