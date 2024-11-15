@@ -40,5 +40,5 @@ async def get_trains():
 async def post_train(train: Train):
     global cursor
     print(train)
-    cursor.execute("""INSERT INTO train_properties(train_name, train_value) VALUES('train.train_name','train.train_value')""")
-    return "Success"
+    cursor.execute("INSERT INTO train_properties(train_name, train_value) VALUES(%s, %s)",(train.train_name, train.train_value))
+    return "Train saved"
